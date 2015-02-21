@@ -6,19 +6,6 @@ function __autoload($classname){
 
 require('config.php');
 
-// Whenever I want to test new CSS/JS/templates, I just add my IP to the array.
-// Everyone else will still get the normal jsPerf.
-// It’s an array so I can easily add testers if I want to.
-$debug = in_array($_SERVER['REMOTE_ADDR'], array('81.123.45.123', '127.0.0.1'));
-
-// In case a deploy goes wrong:
-/*
-if (!$debug) {
-	header('HTTP/1.1 503 Service Temporarily Unavailable');
-	die('jsPerf is temporarily unavailable.');
-}
-*/
-
 session_name('jsPerf');
 ini_set('session.use_only_cookies', '1'); // Don’t use query string
 ini_set('session.cookie_httponly', true); // So session cookies won’t appear in document.cookie
@@ -45,7 +32,7 @@ if (get_magic_quotes_gpc()) {
 	array_walk_recursive($_REQUEST, 'die_magic_quotes_die_die_die');
 }
 
-if ($debug || isset($_SESSION['admin'])) {
+if ($isset($_SESSION['admin'])) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 } else {

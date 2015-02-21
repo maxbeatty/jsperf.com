@@ -68,10 +68,7 @@ if (!empty($_POST)) {
 $home = $jsClass = $mainJS = true; require('head.tpl');
 
 ?>
-<h1><strong><em title="JavaScript">js</em>Perf</strong> — JavaScript performance playground</h1>
-<h2>What is jsPerf?</h2>
-<p>jsPerf aims to provide an easy way to create and share <a href="/browse" title="View some examples by browsing the jsPerf test cases">test cases</a>, comparing the performance of different JavaScript snippets by running benchmarks. For more information, see <a href="/faq" title="Frequently asked questions">the FAQ</a>.</p>
-<h2>Create a test case</h2>
+
 <form action="/" method="post">
 	<fieldset>
 		<h3>Your details (optional)</h3>
