@@ -21,11 +21,6 @@ AddType text/css;charset=UTF-8 .css
 	ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
-<Files .git*>
-	order allow,deny
-	deny from all
-</Files>
-
 <IfModule mod_rewrite.c>
 
 	RewriteEngine On
@@ -61,14 +56,6 @@ AddType text/css;charset=UTF-8 .css
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^_css/([0-9]*).css$ _css/main.css
-
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^api/json$ _api/json.php [L]
-
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^api/jsonp$ _api/jsonp.php [L]
 
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
