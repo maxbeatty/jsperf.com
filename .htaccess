@@ -26,8 +26,6 @@ AddType text/css;charset=UTF-8 .css
 	RewriteEngine On
 	RewriteBase /
 
-	RewriteRule ^@$ http://twitter.com/jsperf [R=301,L]
-
 	# If running a local copy of jsPerf please feel free to prune these redirects
 	RewriteRule ^dart-disclaimer http://jsperf.com/dart [R=301,L]
 	RewriteRule ^document-head-speed-test$ http://jsperf.com/document-head [R=301,L]
