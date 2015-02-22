@@ -19,7 +19,7 @@ if (isset($item)) {
 <meta name="robots" content="noindex">
 <meta name="referrer" content="origin">
 <?php } ?>
-<link rel="stylesheet" href="http://<?php echo DOMAIN; /* don’t use ASSETS_DOMAIN here in case the CSS will be XHRed */ ?>/_css/<?php echo $debug ? 'main.src' : '130824'; ?>.css<?php echo $debug ? '?' . time() : ''; ?>">
+<link rel="stylesheet" href="/_css/<?php echo $debug ? 'main.src' : '130824'; ?>.css<?php echo $debug ? '?' . time() : ''; ?>">
 <?php if ($home) { ?>
 <link href="/browse.atom" rel="alternate" type="application/atom+xml" title="Atom feed for new or updated test cases">
 <?php } else if ($author) { ?>
@@ -32,7 +32,7 @@ if (isset($item)) {
 <?php if ($jsClass) { ?>
 <script>document.documentElement.className='js'</script>
 <?php } ?>
-<!--[if lt IE 9]><script src="//<?php echo ASSETS_DOMAIN; ?>/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="/html5.js"></script><![endif]-->
 </head>
 <?php flush(); ?>
 <body>
