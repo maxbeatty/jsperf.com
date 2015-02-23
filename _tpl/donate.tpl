@@ -1,1 +1,0 @@
-<?php header('Location: http://' . DOMAIN . '/faq#donate', null, 301); ?>

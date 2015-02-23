@@ -26,16 +26,6 @@ AddType text/css;charset=UTF-8 .css
 	RewriteEngine On
 	RewriteBase /
 
-	# If running a local copy of jsPerf please feel free to prune these redirects
-	RewriteRule ^dart-disclaimer http://jsperf.com/dart [R=301,L]
-	RewriteRule ^document-head-speed-test$ http://jsperf.com/document-head [R=301,L]
-	RewriteRule ^testing$ http://jsperf.com/accessing-dom-elements [R=301,L]
-	RewriteRule ^array-creating http://jsperf.com/literal-vs-constructor-array [R=301,L]
-	RewriteRule ^jquery-each2-vs-quickeach-vs-each http://jsperf.com/jquery-each-vs-quickeach/2 [R=301,L]
-	RewriteRule ^equlity-operators-with-the-same-types http://jsperf.com/equality-operators-with-the-same-types [R=301,L]
-	RewriteRule ^math-min-a-b-vs-a-b-a-b http://jsperf.com/math-vs-greater-than [R=301,L]
-	RewriteRule ^remove-all-child-nodes http://jsperf.com/removechildren/3 [R=301,L]
-
 	RewriteCond %{HTTP_HOST} !^jsperf.com|^a\.jsperf.com|^dev\.jsperf.com$ [NC]
 	RewriteRule ^(.*)$ http://jsperf.com%{REQUEST_URI} [R=301,L]
 
