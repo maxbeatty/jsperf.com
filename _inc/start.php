@@ -225,17 +225,6 @@ function epv($var, $textarea = false, $testID = false, $req = false) {
 	echo $output;
 }
 
-function showTestInput($i) {
-?>
-			<fieldset>
-				<h4>Code snippet <?php echo $i; ?></h4>
-				<div><label for="test[<?php echo $i; ?>][title]">Title <em title="This field is required">*</em> </label><input type="text" <?php epv('title', false, $i); ?> required></div>
-				<div><label for="test[<?php echo $i; ?>][defer]">Async </label><label class="inline"><input type="checkbox" value="y" <?php epv('defer', false, $i); ?>> (check if this is an <a href="/faq#async">asynchronous test</a>)</label></div>
-				<div><label for="test[<?php echo $i; ?>][code]">Code <em title="This field is required">*</em> </label><?php epv('code', true, $i); ?></div>
-			</fieldset>
-<?php
-}
-
 function highlight($str, $lang = 'javascript') {
 	include_once('geshi.php');
 	$geshi = new GeSHi($str, $lang);

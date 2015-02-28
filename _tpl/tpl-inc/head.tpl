@@ -10,10 +10,7 @@ if (isset($item)) {
 
 <title><?php if (isset($title)) { ?><?php echo removeBackticks(he($title)); ?> · jsPerf<?php } ?></title>
 
-<?php if ($home) { ?>
-<meta name="description" content="A performance playground for JavaScript developers. Easily create and share test cases and run cross-browser benchmarks to find out which code snippet is most efficient.">
-
-<?php } else if ($showAtom && isset($item) && '' !== trim($item->info)) { ?>
+<?php if ($showAtom && isset($item) && '' !== trim($item->info)) { ?>
 <meta name="description" content="<?php echo trim(shorten(strip_tags(str_replace(array('"', "\n"), array('&quot;', ' '), md($item->info))))); ?>">
 
 <?php } else if ($noIndex) { ?>
@@ -23,10 +20,7 @@ if (isset($item)) {
 <?php } ?>
 
 
-<?php if ($home) { ?>
-<link href="/browse.atom" rel="alternate" type="application/atom+xml" title="Atom feed for new or updated test cases">
-
-<?php } else if ($author) { ?>
+<?php if ($author) { ?>
 <link href="/browse/<?php echo $author; ?>.atom" rel="alternate" type="application/atom+xml" title="Atom feed for test cases by this author">
 
 <?php } else if ($search) { ?>
@@ -35,10 +29,6 @@ if (isset($item)) {
 <?php } else if ($showAtom) { ?>
 <link href="/<?php echo $slug; ?>.atom" rel="alternate" type="application/atom+xml" title="<?php echo ($slug == 'browse' ? 'Atom feed for new or updated test cases' : 'Atom feed for revisions of this test case'); ?>">
 
-<?php } ?>
-
-<?php if ($jsClass) { ?>
-<script>document.documentElement.className='js'</script>
 <?php } ?>
 
 <?php flush(); ?>
