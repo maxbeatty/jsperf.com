@@ -11,7 +11,19 @@ if (isset($item)) {
 <title><?php if (isset($title)) { ?><?php echo removeBackticks(he($title)); ?> · jsPerf<?php } ?></title>
 
 <?php if ($showAtom && isset($item) && '' !== trim($item->info)) { ?>
-<meta name="description" content="<?php echo trim(shorten(strip_tags(str_replace(array('"', "\n"), array('&quot;', ' '), md($item->info))))); ?>">
+<meta name="description" content="<?php
+	echo trim(
+		shorten(
+			strip_tags(
+				str_replace(
+					array('"', "\n"),
+					array('&quot;', ' '),
+					md($item->info)
+				)
+			)
+		)
+	);
+?>">
 
 <?php } else if ($noIndex) { ?>
 <meta name="robots" content="noindex">
