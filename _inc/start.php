@@ -4,11 +4,6 @@ function __autoload($classname){
 	include_once(strtolower($classname) . '.php');
 }
 
-require('config.php');
-
-session_name('jsPerf');
-ini_set('session.use_only_cookies', '1'); // Don’t use query string
-ini_set('session.cookie_httponly', true); // So session cookies won’t appear in document.cookie
 ini_set('session.hash_function', '1'); // Use 160-bit SHA-1 encryption
 ini_set('session.hash_bits_per_character', '6'); // 0-9, a-z, A-Z, "-", ","
 ini_set('session.cookie_lifetime', '28800'); // 28,800 seconds = 8 hours
@@ -18,19 +13,6 @@ session_start();
 ini_set('user_agent', 'jsPerf');
 date_default_timezone_set('Europe/Brussels');
 setlocale(LC_ALL, 'en_US');
-
-// Normalize $_POST, $_GET, $_COOKIE and $_REQUEST in case magic quotes are enabled
-// This script is very inefficient so please use directives instead!
-// Before anything else, make sure magic_quotes_gpc() is out of the picture.
-if (get_magic_quotes_gpc()) {
-	function die_magic_quotes_die_die_die(&$value) {
-		$value = stripslashes($value);
-	}
-	array_walk_recursive($_GET, 'die_magic_quotes_die_die_die');
-	array_walk_recursive($_POST, 'die_magic_quotes_die_die_die');
-	array_walk_recursive($_COOKIE, 'die_magic_quotes_die_die_die');
-	array_walk_recursive($_REQUEST, 'die_magic_quotes_die_die_die');
-}
 
 if ($isset($_SESSION['admin'])) {
 	error_reporting(E_ALL);
@@ -233,8 +215,3 @@ function highlight($str, $lang = 'javascript') {
 	//echo $geshi->get_stylesheet();
 	return str_replace('<br />' . "\n", '<br>', $geshi->parse_code());
 }
-
-$db = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
-$db->set_charset('utf8');
-
-?>
