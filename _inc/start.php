@@ -60,22 +60,6 @@ $reservedActions = array(
 	'404'
 );
 
-function userAgent() {
-	$browser = new Browser();
-	return str_replace(array('Internet Explorer', 'iPhone'), array('IE', 'Mobile Safari'), $browser->getBrowser()) . ' ' . $browser->getVersion();
-}
-
-function removeFromBegin($str, $remove) {
-	$regex = sprintf('/^%s/', preg_quote($remove, '/'));
-	return preg_replace($regex, '', $str);
-}
-
-function author($name, $url, $isComment = false) {
-	if ($name !== '') {
-		return ($isComment ? '': 'by ') . ($url !== '' ? '<a href="' . he(removeFromBegin($url, 'http:')) . '"' . ($url === 'http://mathiasbynens.be/' ? '' : ' rel="nofollow"') . '>' . he($name) . '</a> ' : he($name) . ' ');
-	}
-}
-
 function slug($str) {
 	// Some versions of MAMP claim to support iconv, but actually return an empty string
 	if (function_exists('iconv') && iconv('UTF-8', 'ASCII//TRANSLIT', 'a')) {
