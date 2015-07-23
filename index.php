@@ -86,10 +86,6 @@ if (!empty($_GET['slug'])) {
 					header('HTTP/1.1 503 Service Unavailable');
 					require('dev.tpl');
 				} else {
-					if (!isset($_SESSION['hits'][$item->id])) {
-						$db->query('UPDATE pages SET hits = hits + 1 WHERE id = ' . $item->id);
-						$_SESSION['hits'][$item->id] = true;
-					}
 					require('testPage.tpl');
 				}
 			}

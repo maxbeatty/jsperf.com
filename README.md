@@ -8,7 +8,6 @@ MySQL and PHP installed.
 1. Download the source code, as located within this repository.
 2. The code expects things to be hosted at `/` and not a subdirectory. You might
    want to create a new virtual host, e.g. `dev.jsperf.com`.
-3. Use `_tmp/database.sql` to create the jsPerf tables in a database of choice.
 4. Rename `_inc/config.sample.php` to `_inc/config.php` and enter your database
    credentials and other info.
 5. For the Browserscope integration to work, you’ll need a Browserscope API key.

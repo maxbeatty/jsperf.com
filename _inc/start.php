@@ -4,24 +4,6 @@ function __autoload($classname){
 	include_once(strtolower($classname) . '.php');
 }
 
-require('config.php');
-
-// Whenever I want to test new CSS/JS/templates, I just add my IP to the array.
-// Everyone else will still get the normal jsPerf.
-// It’s an array so I can easily add testers if I want to.
-$debug = in_array($_SERVER['REMOTE_ADDR'], array('81.123.45.123', '127.0.0.1'));
-
-// In case a deploy goes wrong:
-/*
-if (!$debug) {
-	header('HTTP/1.1 503 Service Temporarily Unavailable');
-	die('jsPerf is temporarily unavailable.');
-}
-*/
-
-session_name('jsPerf');
-ini_set('session.use_only_cookies', '1'); // Don’t use query string
-ini_set('session.cookie_httponly', true); // So session cookies won’t appear in document.cookie
 ini_set('session.hash_function', '1'); // Use 160-bit SHA-1 encryption
 ini_set('session.hash_bits_per_character', '6'); // 0-9, a-z, A-Z, "-", ","
 ini_set('session.cookie_lifetime', '28800'); // 28,800 seconds = 8 hours
@@ -32,20 +14,7 @@ ini_set('user_agent', 'jsPerf');
 date_default_timezone_set('Europe/Brussels');
 setlocale(LC_ALL, 'en_US');
 
-// Normalize $_POST, $_GET, $_COOKIE and $_REQUEST in case magic quotes are enabled
-// This script is very inefficient so please use directives instead!
-// Before anything else, make sure magic_quotes_gpc() is out of the picture.
-if (get_magic_quotes_gpc()) {
-	function die_magic_quotes_die_die_die(&$value) {
-		$value = stripslashes($value);
-	}
-	array_walk_recursive($_GET, 'die_magic_quotes_die_die_die');
-	array_walk_recursive($_POST, 'die_magic_quotes_die_die_die');
-	array_walk_recursive($_COOKIE, 'die_magic_quotes_die_die_die');
-	array_walk_recursive($_REQUEST, 'die_magic_quotes_die_die_die');
-}
-
-if ($debug || isset($_SESSION['admin'])) {
+if ($isset($_SESSION['admin'])) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 } else {
@@ -90,22 +59,6 @@ $reservedActions = array(
 	'403',
 	'404'
 );
-
-function userAgent() {
-	$browser = new Browser();
-	return str_replace(array('Internet Explorer', 'iPhone'), array('IE', 'Mobile Safari'), $browser->getBrowser()) . ' ' . $browser->getVersion();
-}
-
-function removeFromBegin($str, $remove) {
-	$regex = sprintf('/^%s/', preg_quote($remove, '/'));
-	return preg_replace($regex, '', $str);
-}
-
-function author($name, $url, $isComment = false) {
-	if ($name !== '') {
-		return ($isComment ? '': 'by ') . ($url !== '' ? '<a href="' . he(removeFromBegin($url, 'http:')) . '"' . ($url === 'http://mathiasbynens.be/' ? '' : ' rel="nofollow"') . '>' . he($name) . '</a> ' : he($name) . ' ');
-	}
-}
 
 function slug($str) {
 	// Some versions of MAMP claim to support iconv, but actually return an empty string
@@ -238,17 +191,6 @@ function epv($var, $textarea = false, $testID = false, $req = false) {
 	echo $output;
 }
 
-function showTestInput($i) {
-?>
-			<fieldset>
-				<h4>Code snippet <?php echo $i; ?></h4>
-				<div><label for="test[<?php echo $i; ?>][title]">Title <em title="This field is required">*</em> </label><input type="text" <?php epv('title', false, $i); ?> required></div>
-				<div><label for="test[<?php echo $i; ?>][defer]">Async </label><label class="inline"><input type="checkbox" value="y" <?php epv('defer', false, $i); ?>> (check if this is an <a href="/faq#async">asynchronous test</a>)</label></div>
-				<div><label for="test[<?php echo $i; ?>][code]">Code <em title="This field is required">*</em> </label><?php epv('code', true, $i); ?></div>
-			</fieldset>
-<?php
-}
-
 function highlight($str, $lang = 'javascript') {
 	include_once('geshi.php');
 	$geshi = new GeSHi($str, $lang);
@@ -257,8 +199,3 @@ function highlight($str, $lang = 'javascript') {
 	//echo $geshi->get_stylesheet();
 	return str_replace('<br />' . "\n", '<br>', $geshi->parse_code());
 }
-
-$db = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
-$db->set_charset('utf8');
-
-?>
